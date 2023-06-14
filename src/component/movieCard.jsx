@@ -1,14 +1,15 @@
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-
+import { LanguageContext } from "../context/context";
 const MovieCard=()=>{
+    const {lang,setLang}=useContext(LanguageContext)
     const [listItems, setListItem] = useState({});
     const param=useParams();
     useEffect(() => {
-        axios.get(`https://api.themoviedb.org/3/movie/${param.id}?api_key=${'79066c32a7c98c1d2a26298c0b7b04d0'}`).then((res) => setListItem(res.data)).catch((err) => console.log(err));
-    }, [param.id])
+        axios.get(`https://api.themoviedb.org/3/movie/${param.id}?api_key=${'79066c32a7c98c1d2a26298c0b7b04d0'}&page=1&language=${lang}`).then((res) => setListItem(res.data)).catch((err) => console.log(err));
+    }, [param.id,lang])
     console.log(listItems)
     
     return (

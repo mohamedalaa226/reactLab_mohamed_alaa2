@@ -7,6 +7,7 @@ import NotFound from "../pages/NotFound";
 import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/ContactUs";
 import NavLayout from "../shared/layout/navLayout";
+import Favorite from "../pages/FavoriteMovie";
 
 const Router=()=>{
     return(
@@ -16,10 +17,11 @@ const Router=()=>{
             <Route path="/Movie-Details/:id" element={<Details />} />
             <Route path="/About Us" element={<AboutUs />} />
             <Route path="/Contact Us" element={<ContactUs />} />
+            <Route path="/FavoriteMovie" element={<Favorite/>} />
             <Route path="*" element={<NotFound />} />
-            </Route>
             <Route path="/Register" element={<Register />} />
             <Route path="/Login" element={<Login />} />
+            </Route>
         </Routes>    
         )
 }

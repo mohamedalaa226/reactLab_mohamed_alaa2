@@ -1,13 +1,20 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import {  Container } from "react-bootstrap"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Card1 from "./Card";
+import { LanguageContext } from "../context/context";
 const Cardlist = () => {
+    const {lang,setLang}=useContext(LanguageContext)
     const [listItems, setListItem] = useState([]);
+    // useEffect(() => {
+    //     axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${'79066c32a7c98c1d2a26298c0b7b04d0'}`).then((res) => setListItem(res.data.results)).catch((err) => console.log(err));
+    // }, [])
+
     useEffect(() => {
-        axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${'79066c32a7c98c1d2a26298c0b7b04d0'}`).then((res) => setListItem(res.data.results)).catch((err) => console.log(err));
-    }, [])
+        axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${'79066c32a7c98c1d2a26298c0b7b04d0'}&page=1&language=${lang}`).then((res) => setListItem(res.data.results)).catch((err) => console.log(err));
+    }, [lang])
+
     const Navigate = useNavigate('');
 
     const handelDetailsBtn =(id) => {
@@ -20,10 +27,8 @@ const Cardlist = () => {
                     return (
                         <div className="col-4" key={index}>
                             <Card1 Data={item} handelDetailsBtn={handelDetailsBtn} />
-                            
                         </div>
                     )
-
                 })}
             </div>
         </Container>

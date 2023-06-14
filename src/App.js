@@ -5,17 +5,18 @@ import Footer from './shared/Footer';
 // import NavBar1 from './shared/NavBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { LanguageContext } from './context/context';
+import { useState } from 'react';
 // import Cardlist from './component/CardList';
 
-
-
-
 function App() {
+  const [lang , setLang]=useState('en');
   return (
     <BrowserRouter>
-        <>
-      <Router />
-    <Footer /></>
+      <LanguageContext.Provider value={{lang , setLang}}>
+          <Router />
+      </LanguageContext.Provider>
+      <Footer />
     </BrowserRouter>
 
   )
